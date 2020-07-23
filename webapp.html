@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="CJ Patoilo" />
+    <meta name="description" content="TF-Media" />
+    <title>TF-Media</title>
+    <link href="https://fonts.googleapis.com/css?family=Italianno|Merriweather:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+
+
+    <style>
+        <?php
+        include('src/css/normalize.css');
+        include('src/css/milligram.css');
+        include('src/css/custom.css');
+        ?>
+    </style>
+
+
+    <script>
+        <?php include('src/js/custom.js'); ?>
+        <?php include('src/js/handlers.js'); ?>
+    </script>
+
+    <?php
+    /*
+     * include the html templates
+     */
+    $directory_iterator = new RecursiveDirectoryIterator('./src/templates');
+    $iterator       = new RecursiveIteratorIterator($directory_iterator);
+    $regex_iterator = new RegexIterator($iterator, '/tpl_.*?\.html$/');
+    $regex_iterator->setFlags(RegexIterator::USE_KEY);
+    foreach ($regex_iterator as $file) {
+        include($file->getPathname());
+    }
+    ?>
+
+
+</head>
+
+
+
+<body>
+    <div class="container container-page">
+        <div class="row">
+            <main class="column" id="column-page">
+
+            </main>
+            <section class="column" id="column-menu">
+                <nav>
+                    <li><a id="menu-top">u</a></li>
+                    <li><a id="menu-story-index">s</a></li>
+                    <li><a id="menu-cyot-index">c</a></li>
+                    <li><a id="menu-bottom">d</a></li>
+                </nav>
+            </section>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <script src=" https://milligram.io/scripts/main.js"> </script> -->
+    <script>
+        var localstorage = {};
+        localstorage.nodemap_cyot = <?= $manager->getAllCYOTNodesJSON(); ?>;
+        localstorage.rootlist_cyot = <?= $manager->getAllCYOTRootNidsJSON(); ?>;
+        localstorage.nodelist_story = <?= $manager->getAllStoryNodesJSON(); ?>;
+
+
+
+
+
+
+
+        /**
+         * initialize the page
+         */
+        (function initialize() {
+
+
+
+            // renderHeader();
+
+            var state = JSON.parse(utilities.getCookie('state'));
+
+            // if (state == null) {
+            //     state = {
+            //         section: 'cyot_index'
+            //     };
+            // }
+
+            window.history.replaceState(state, null, "");
+            render(state);
+        })();
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+        });
+    </script>
+</body>
+
+</html>
