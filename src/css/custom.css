@@ -47,7 +47,8 @@ body {
     /* color: #111115; */
     min-height: 100%;
     display: flex;
-    font-family: "Computer Modern Sans", sans-serif;
+    font-family: "latin_modern_roman10_regular", sans-serif;
+    color: #111115;
 }
 
 h1 {
@@ -126,13 +127,13 @@ p {
 .template__cyot__teaser,
 .template__cyot_short__teaser,
 .template__cyot__title {
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: "latin_modern_roman10_regular", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     /* font-family: 'Merriweather', serif; */
 }
 
 .template__story__title,
 .template__cyot__title {
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: "latin_modern_roman10_regular", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     font-variant: small-caps;
     color: #111115;
     margin-bottom: 7rem;
@@ -141,7 +142,7 @@ p {
 
 .template__story_short__title,
 .template__cyot_short__title {
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: "latin_modern_roman10_regular", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     font-variant: small-caps;
     color: #111115;
     /* margin-bottom: 7rem; */
