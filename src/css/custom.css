@@ -48,7 +48,8 @@ body {
     min-height: 100%;
     display: flex;
     font-family: "latin_modern_roman10_regular", sans-serif;
-    color: #111115;
+    /* color: #111115; */
+    letter-spacing: 0;
 }
 
 h1 {
@@ -87,6 +88,12 @@ h6 {
 p {
     text-align: justify;
     margin-bottom: 6rem;
+}
+
+p:not(.divider)+p {
+    /* margin-top: 0em; */
+    /* margin-bottom: 0em; */
+    text-indent: 5rem;
 }
 
 .term:hover {
@@ -133,17 +140,17 @@ p {
 
 .template__story__title,
 .template__cyot__title {
-    font-family: "latin_modern_roman10_regular", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-    font-variant: small-caps;
+    font-family: "latin_modern_sans10_bold", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    /* font-variant: small-caps; */
     color: #111115;
-    margin-bottom: 7rem;
-    text-align: center;
+    /* margin-bottom: 7rem; */
+    /* text-align: center; */
 }
 
 .template__story_short__title,
 .template__cyot_short__title {
-    font-family: "latin_modern_roman10_regular", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-    font-variant: small-caps;
+    font-family: "latin_modern_sans10_bold", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    /* font-variant: small-caps; */
     color: #111115;
     /* margin-bottom: 7rem; */
 }

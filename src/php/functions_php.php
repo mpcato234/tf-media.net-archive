@@ -49,7 +49,7 @@ function nl2p($text)
     // $string = json_encode($string);
     $string = $purifier_wrapper->purify($string);
 
-    // $string = preg_replace('/######/', "<div class=\"divider\" />", $string);
+    $string = preg_replace('/<p><\/p>/', "", $string);
 
 
     return $string;
