@@ -50,6 +50,19 @@ body {
     font-family: "latin_modern_roman10_regular", sans-serif;
     /* color: #111115; */
     letter-spacing: 0;
+    line-height: 1.8;
+    /* max-width: 80ch; */
+    text-rendering: geometricPrecision;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "latin_modern_sans10_bold", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    color: #111115;
 }
 
 h1 {
@@ -343,4 +356,59 @@ body {
     width: 100%;
     content: '';
     border-top: 1px solid;
+}
+
+.choices {
+    color: #d7d8e0;
+    transition: color 1s;
+}
+
+.choices.active,
+.choices:hover {
+    color: inherit;
+}
+
+.choices ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.choices a {
+    cursor: pointer;
+    color: inherit;
+}
+
+.choices ul li {
+    display: flex;
+}
+
+.choices ulli>* {
+    flex: 1 1 auto;
+}
+
+.choices ul li>*:first-child {
+    flex: 0 0 auto;
+}
+
+.ellipses {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.ellipses:before {
+    content: '. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+}
+
+
+.page_title {
+    font-family: "latin_modern_sans10_bold", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    /* font-variant: small-caps; */
+    color: #111115;
+    /* margin-bottom: 7rem; */
+    /* text-align: center; */
 }

@@ -78,7 +78,7 @@ function render(state) {
         case "cyot_chapter":
             if (state.nid) {
                 // render chapter using state.nid
-                // renderCYOTNode(obj, state.nid);
+                renderCYOTNode(localstorage.nodemap_cyot, state.nid);
             } else {
                 // fallback to rendering the index probably
                 //state.section = "cyot_index";
@@ -172,6 +172,207 @@ function renderStory(nodelist, nid) {
     author.textContent = node.author;
 
     main.appendChild(page);
+}
+
+
+/**
+         * render one story node
+         */
+function renderCYOTNode(nodelist, nid, isLast = true) {
+    let main = document.querySelector('#column-page');
+    // console.trace(nodelist, nid);
+
+    var node = nodelist[nid];
+    // var node = nodelist.find(function (element) {
+    //     return element.nid && (element.nid == nid);
+    // });
+    console.trace("renderCYOTNode", node);
+
+
+    if (node != undefined) {
+
+        // render all parents so far
+        let isRootNode = renderCYOTNode(nodelist, node.parent, false);
+
+        // do the actual rendering
+
+        if (isRootNode) {
+            let t = document.querySelector('#template__cyot_root');
+            // let t_menu = document.querySelector('#template__menu');
+            let cyot_root = document.importNode(t.content, true);
+            let title = cyot_root.querySelector('.cyot_title');
+            let teaser = cyot_root.querySelector('.teaser');
+            let body = cyot_root.querySelector('.body');
+            let author = cyot_root.querySelector('.author');
+            // var terms = page.querySelector('.template__story__terms');
+            let choices = cyot_root.querySelector('.choices');
+
+            if (isLast) {
+                choices.classList.add('active');
+            }
+
+
+            title.textContent = node.title;
+            body.innerHTML = node.body;
+            teaser.innerHTML = node.teaser;
+            author.textContent = node.author;
+
+            // render choices
+            {
+                var ul = choices.querySelector('ul');
+                let t = document.querySelector('#template__cyot_choice');
+                for (var i = 0; i < node.children.length; i++) {
+                    //console.trace(chapter.children[i]);
+                    let nextnode = nodelist[node.children[i].nid];
+                    var clone = document.importNode(t.content, true);
+                    let a = clone.querySelector('.cyot_choice__title');
+                    let dmin = clone.querySelector('.cyot_choice__depth_minimum')
+                    let dmax = clone.querySelector('.cyot_choice__depth_maximum')
+                    a.innerText = node.children[i].title;
+
+                    a.option = node.children[i].nid;
+                    a.onclick = function (e) {
+                        let state = { section: "cyot_chapter", nid: this.option, position: "chapterstart" };
+                        window.history.pushState(state, null, "");
+                        render(state);
+                    };
+                    if (node.children[i].isSuggested) {
+                        a.classList.add('suggested');
+                    }
+
+                    dmin.innerText = nextnode.mindepth;
+                    dmax.innerText = nextnode.maxdepth;
+
+                    ul.appendChild(clone);
+                }
+            }
+
+            main.appendChild(cyot_root);
+        } else {
+            let cyot_root = document.querySelector('.cyot_nodes');
+            let t = document.querySelector('#template__cyot_node');
+            // let t_menu = document.querySelector('#template__menu');
+            let cyot_node = document.importNode(t.content, true);
+
+            let title = cyot_node.querySelector('.title');
+            let teaser = cyot_node.querySelector('.teaser');
+            let body = cyot_node.querySelector('.body');
+            let author = cyot_node.querySelector('.author');
+            // var terms = page.querySelector('.template__story__terms');
+            let choices = cyot_node.querySelector('.choices');
+
+            if (isLast) {
+                choices.classList.add('active');
+            }
+
+            title.textContent = node.title;
+            body.innerHTML = node.body;
+            teaser.innerHTML = node.teaser;
+            author.textContent = node.author;
+
+            // render choices
+            {
+                var ul = choices.querySelector('ul');
+                let t = document.querySelector('#template__cyot_choice');
+                for (var i = 0; i < node.children.length; i++) {
+                    //console.trace(chapter.children[i]);
+                    let nextnode = nodelist[node.children[i].nid];
+                    var clone = document.importNode(t.content, true);
+                    let a = clone.querySelector('.cyot_choice__title');
+                    let dmin = clone.querySelector('.cyot_choice__depth_minimum')
+                    let dmax = clone.querySelector('.cyot_choice__depth_maximum')
+                    a.innerText = node.children[i].title;
+
+                    a.option = node.children[i].nid;
+                    a.onclick = function (e) {
+                        let state = { section: "cyot_chapter", nid: this.option, position: "chapterstart" };
+                        window.history.pushState(state, null, "");
+                        render(state);
+                    };
+                    if (node.children[i].isSuggested) {
+                        a.classList.add('suggested');
+                    }
+
+                    dmin.innerText = nextnode.mindepth;
+                    dmax.innerText = nextnode.maxdepth;
+
+                    ul.appendChild(clone);
+                }
+
+                cyot_root.append(cyot_node);
+            }
+        }
+
+        if (false) {
+            let t = document.querySelector('#template__cyot');
+            // let t_menu = document.querySelector('#template__menu');
+            let cyot = document.importNode(t.content, true);
+
+            // let menu = document.importNode(t_menu.content, true);
+
+            let title = cyot.querySelector('.template__cyot__title');
+            // console.trace(title);
+            // let body = page.querySelector('.template__story__body');
+            let teaser = cyot.querySelector('.template__cyot__teaser');
+            let body = cyot.querySelector('.template__cyot__body');
+            let author = cyot.querySelector('.template__cyot__author');
+            // var terms = page.querySelector('.template__story__terms');
+            let choices = cyot.querySelector('.template__cyot__choices');
+
+
+
+            // renderTerms(node.terms, terms);
+
+
+            // render choices
+            {
+                var ul = choices.querySelector('ul');
+                let t = document.querySelector('#template__cyot_choice');
+                for (var i = 0; i < node.children.length; i++) {
+                    //console.trace(chapter.children[i]);
+                    let nextnode = nodelist[node.children[i].nid];
+                    var clone = document.importNode(t.content, true);
+                    let a = clone.querySelector('.cyot_choice__title');
+                    let dmin = clone.querySelector('.cyot_choice__depth_minimum')
+                    let dmax = clone.querySelector('.cyot_choice__depth_maximum')
+                    a.innerText = node.children[i].title;
+
+                    a.option = node.children[i].nid;
+                    a.onclick = function (e) {
+                        let state = { section: "cyot_chapter", nid: this.option, position: "chapterstart" };
+                        window.history.pushState(state, null, "");
+                        render(state);
+                    };
+                    if (node.children[i].isSuggested) {
+                        a.classList.add('suggested');
+                    }
+
+                    dmin.innerText = nextnode.mindepth;
+                    dmax.innerText = nextnode.maxdepth;
+
+                    ul.appendChild(clone);
+                }
+            }
+
+
+
+            title.textContent = node.title;
+            body.innerHTML = node.body;
+            teaser.innerHTML = node.teaser;
+            author.textContent = node.author;
+
+            main.appendChild(cyot);
+        }
+        return false;
+    } else {
+        // clear the main element for future use
+        main.innerHTML = "";
+        return true;
+    }
+
+
+
+
 }
 
 
