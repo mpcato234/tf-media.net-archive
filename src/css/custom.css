@@ -267,9 +267,9 @@ text-align: center;
 
 
 
-body {
+/* body {
     background-color: #171922;
-}
+} */
 
 .container-page {
     background-color: #FFFFFF;
@@ -298,8 +298,10 @@ body {
 
 #column-menu nav {
     position: sticky;
-    top: calc(50% - 2*5rem);
+    top: 50%;
     list-style: none;
+    transform: translate(0, -50%);
+    transition: transform 1s;
 }
 
 #column-menu nav li {
@@ -312,7 +314,7 @@ body {
     text-align: center;
     vertical-align: middle;
     color: #d7d8e0;
-    transition: color 1s, border-color 1s;
+    transition: color 1s, border-color 1s, opacity 1s, display 1s linear 1s;
 }
 
 #column-menu nav li:hover {
@@ -411,4 +413,13 @@ body {
     color: #111115;
     /* margin-bottom: 7rem; */
     /* text-align: center; */
+}
+
+
+.menu_hidden {
+    opacity: 0;
+    /* display: none; */
+    /* height: 0 !important; */
+    /* border: 0 none !important; */
+    /* overflow: hidden; */
 }

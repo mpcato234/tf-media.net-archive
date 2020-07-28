@@ -599,3 +599,28 @@ function reloadCollapsible() {
 
     }
 }
+
+
+function updateMenu() {
+    let distance_threshold = 500;
+    console.log(window.pageYOffset);
+
+    let menu_top = document.querySelector('#menu-top');
+    if (window.pageYOffset <= distance_threshold) {
+        menu_top.classList.add('menu_hidden');
+    } else {
+        menu_top.classList.remove('menu_hidden');
+    }
+
+
+    let menu_bottom = document.querySelector('#menu-bottom');
+    // @var int totalPageHeight
+    let totalPageHeight = document.body.scrollHeight;
+    // @var int scrollPoint
+    let scrollPoint = window.scrollY + window.innerHeight;
+    if (scrollPoint >= totalPageHeight - distance_threshold) {
+        menu_bottom.classList.add('menu_hidden');
+    } else {
+        menu_bottom.classList.remove('menu_hidden');
+    }
+}
